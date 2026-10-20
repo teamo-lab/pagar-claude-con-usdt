@@ -7,7 +7,7 @@
 ## Respuesta corta
 
 - **Qué cambia en tu código:** la base URL y la key (`sk-teamo-...`). Para Claude, `https://api.teamorouter.com` (sin `/v1`) con el protocolo nativo de Anthropic; para GPT, `https://api.teamorouter.com/v1` con el formato estándar de OpenAI. Requests, respuestas y streaming siguen el formato de cada protocolo.
-- **Cómo pagás:** en la ventana de recarga hacés clic en **Pay with crypto**, elegís la red en la página de pago (BEP20, TRC20 o ERC20) y transferís USDT a la dirección que te muestra, desde la app de tu exchange (Binance, OKX u otros) o desde cualquier wallet. No necesitás extensión del navegador y funciona desde el celular. Mínimo US$5. La ventana de recarga también acepta tarjeta a través de Stripe.
+- **Cómo pagás:** en la ventana de recarga hacés clic en **Pay with crypto**, en la página de pago elegís la moneda (USDT, USDC o ETH) y después la red, y transferís a la dirección que te muestra. La página de pago muestra qué redes admite tu monto (BEP20 funciona desde US$5). Podés mandar desde la app de tu exchange (Binance, OKX u otros) o desde cualquier wallet. No necesitás extensión del navegador y funciona desde el celular. Mínimo US$5. La ventana de recarga también acepta tarjeta a través de Stripe.
 - **Qué obtenés:** una sola key para Claude, GPT (`gpt-6-sol`, `gpt-6-luna`, `gpt-6-astra` y otros), Gemini, DeepSeek y más de 30 modelos, con cobro por token y sin suscripción.
 - **Qué no necesitás:** cuenta de Anthropic u OpenAI, login de ChatGPT ni tarjeta de crédito.
 
@@ -163,32 +163,34 @@ Ejecutá `codex`. Los pasos para Windows (PowerShell) están en la [guía de Cod
 
 ## Recargar con USDT, paso a paso
 
-Necesitás una cuenta de TeamoRouter y USDT en un exchange o en una wallet, que alcance para el monto de la recarga más la comisión de retiro. Nada más: la página de pago es una página web común, así que con el celular y la app de tu exchange alcanza.
+Necesitás una cuenta de TeamoRouter y USDT, USDC o ETH en un exchange o en una wallet, que alcance para el monto de la recarga más la comisión de retiro. Nada más: la página de pago es una página web común, así que con el celular y la app de tu exchange alcanza.
 
-### Redes aceptadas
+### Monedas y redes aceptadas
 
-TeamoRouter acepta solo USDT, en tres redes:
+La página de pago acepta USDT, USDC y ETH. Qué monedas y redes ofrece depende del monto de la orden. Al 2026-10-20, la página de pago muestra lo que está disponible para tu monto:
 
-| Red | Notas |
+| Monto de la orden | Qué ofrece la página de pago |
 |---|---|
-| BEP20 (BNB Smart Chain) | Recomendada: retirar desde Binance cuesta alrededor de 0,01 USDT |
-| TRC20 (Tron) | Retirar desde Binance cuesta alrededor de 1,5 USDT |
-| ERC20 (Ethereum) | |
+| Desde US$5 | ETH, USDC en BNB Smart Chain (BEP20), USDT en BNB Smart Chain (BEP20) |
+| Desde US$20 | Además USDC en Base y USDT en Ethereum (ERC20) |
+| Desde US$50 | Además USDT en Tron (TRC20) |
 
-Cualquier otra moneda que mandes a la dirección de pago no cuenta como pago. Las comisiones de retiro las fija cada exchange y cambian con el tiempo, así que fijate cuánto cobran en la pantalla de retiro.
+Para montos chicos, elegí **USDT en BEP20**: está disponible desde US$5, y retirar desde Binance por BEP20 cuesta alrededor de 0,01 USDT, contra alrededor de 1,5 USDT por TRC20. OKX no permite retirar USDT por BEP20; desde OKX, recargá US$20 o más y usá ERC20, que ahí cuesta menos que TRC20.
+
+Mandá solo la moneda y la red que elegiste; cualquier otra cosa que mandes a la dirección de pago no cuenta como pago. Las comisiones de retiro las fija cada exchange y cambian con el tiempo, así que fijate cuánto cobran en la pantalla de retiro.
 
 ### Pasos
 
-1. Iniciá sesión en TeamoRouter, abrí la ventana de recarga en la consola y elegí un monto (US$5 o más).
+1. Iniciá sesión en TeamoRouter, abrí la ventana de recarga en la consola y elegí un monto (US$5 o más). El monto define qué monedas y redes ofrece la página de pago.
 2. Hacé clic en **Pay with crypto** (en pantallas angostas el botón dice **Crypto**). Te lleva a la página de pago. Si te registraste con un número de teléfono, primero te van a pedir un email.
-3. La página de pago abre directamente en la elección de red. Elegí la red por la que vas a mandar: BEP20, TRC20 o ERC20. La página te muestra cuántos USDT transferir y una dirección de depósito. La orden vale **60 minutos**.
-4. En la app de tu exchange, iniciá un retiro (en una wallet, un envío): elegí **USDT en la misma red**, pegá la dirección de la página de pago y poné el monto de forma que lo que te llegue **no sea menor que el monto de la página**.
+3. La página de pago primero te pide elegir la moneda (USDT, USDC o ETH) y después la red por la que vas a mandar. Solo aparecen las redes disponibles para tu monto. La página te muestra cuánto transferir y una dirección de depósito. La orden vale **60 minutos**.
+4. En la app de tu exchange, iniciá un retiro (en una wallet, un envío): elegí **la misma moneda en la misma red**, pegá la dirección de la página de pago y poné el monto de forma que lo que te llegue **no sea menor que el monto de la página**.
 5. Esperá a que la red confirme la transferencia. El saldo se acredita cuando se confirma el pago, aunque cierres la página de pago. Si todavía no aparece, actualizá la consola en un rato y no vuelvas a pagar.
 6. Cuando se acredite el saldo, [creá una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt).
 
 ### Por qué puede fallar un pago cripto
 
-- **Mandar por otra red.** Retirá por la misma red que elegiste en la página de pago. Las direcciones BEP20 y ERC20 empiezan las dos con `0x`, así que el exchange te va a dejar mandar USDT por ERC20 a una dirección BEP20, pero esa transferencia no cuenta como pago de la orden. Cada exchange llama a las redes a su manera: BEP20 puede aparecer como BSC o BNB Smart Chain, TRC20 como Tron y ERC20 como Ethereum. Si tu exchange no permite retirar USDT por esa red, volvé a la página de pago y elegí una que sí ofrezca.
+- **Mandar otra moneda o por otra red.** Retirá la misma moneda, por la misma red que elegiste en la página de pago. Las direcciones BEP20 y ERC20 empiezan las dos con `0x`, así que el exchange te va a dejar mandar USDT por ERC20 a una dirección BEP20, pero esa transferencia no cuenta como pago de la orden. Cada exchange llama a las redes a su manera: BEP20 puede aparecer como BSC o BNB Smart Chain, TRC20 como Tron y ERC20 como Ethereum. Si tu exchange no permite retirar esa moneda por esa red, volvé a la página de pago y elegí una que sí ofrezca.
 - **La comisión de retiro se come parte del monto.** Muchos exchanges descuentan la comisión del monto que escribís. Antes de confirmar, mirá la línea de "monto a recibir" en la pantalla de retiro: tiene que ser por lo menos el monto de la página de pago; si la comisión sale de tu monto, sumala arriba. Una orden a la que le falta hasta un 1% igual cuenta como pagada. Si falta más, no mandes una segunda transferencia: contactá a soporte con tu TxID. Si mandás de más, el saldo se acredita por el monto de la orden y podés contactar a soporte por la diferencia.
 - **La orden vence.** A veces el exchange retiene el retiro para una revisión manual, que puede tardar más de 60 minutos. Antes de hacer clic en **Pay with crypto**, asegurate de que los USDT ya estén en la cuenta del exchange desde la que vas a retirar. Si venció antes de que mandaras nada: renová la orden en la página de pago o empezá una recarga nueva, y mandá a la dirección vigente, no a una que copiaste antes. Si venció después de que ya mandaste: no vuelvas a mandar; renová la orden en la página de pago y, si con eso no se resuelve, contactá a soporte con tu TxID.
 
@@ -205,7 +207,7 @@ Guía completa: [Pay for Claude and GPT APIs with Crypto (USDT)](https://teamoro
 
 ## ¿Ya tenés USDT en X Layer? Pagá con OKX Wallet
 
-OKX Wallet funciona como cualquier otra wallet en la página de pago: elegís la red ahí y mandás desde la wallet. Para mandar desde una wallet necesitás la moneda de esa red para el gas, por ejemplo BNB en BEP20.
+OKX Wallet funciona como cualquier otra wallet en la página de pago: elegís la moneda y la red ahí y mandás desde la wallet. Para mandar desde una wallet necesitás la moneda de esa red para el gas, por ejemplo BNB en BEP20.
 
 Si tus USDT ya están en X Layer (on-chain aparecen como USD₮0), podés saltearte la página de pago. Con la [extensión OKX Wallet](https://chromewebstore.google.com/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge) instalada y desbloqueada en un navegador de escritorio (Chrome, Edge o Brave), la ventana de recarga muestra un link extra, **Have USDT on X Layer? Pay with OKX Wallet**. Usá ese link, no el botón **Pay with crypto**:
 
