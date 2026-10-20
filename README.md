@@ -172,10 +172,10 @@ La página de pago acepta USDT, USDC y ETH. Qué monedas y redes ofrece depende 
 | Monto de la orden | Qué ofrece la página de pago |
 |---|---|
 | Desde US$5 | ETH, USDC en BNB Smart Chain (BEP20), USDT en BNB Smart Chain (BEP20) |
-| Desde US$20 | Además USDC en Base y USDT en Ethereum (ERC20) |
-| Desde US$50 | Además USDT en Tron (TRC20) |
+| Desde US$10 | Además USDC en Base y USDT en Ethereum (ERC20) |
+| Desde US$30 | Además USDT en Tron (TRC20) |
 
-Para montos chicos, elegí **USDT en BEP20**: está disponible desde US$5, y retirar desde Binance por BEP20 cuesta alrededor de 0,01 USDT, contra alrededor de 1,5 USDT por TRC20. OKX no permite retirar USDT por BEP20; desde OKX, recargá US$20 o más y usá ERC20, que ahí cuesta menos que TRC20.
+Para montos chicos, elegí **USDT en BEP20**: está disponible desde US$5, y retirar desde Binance por BEP20 cuesta alrededor de 0,01 USDT, contra alrededor de 1,5 USDT por TRC20. OKX no permite retirar USDT por BEP20; desde OKX, recargá US$10 o más y usá ERC20, que ahí cuesta menos que TRC20.
 
 Mandá solo la moneda y la red que elegiste; cualquier otra cosa que mandes a la dirección de pago no cuenta como pago. Las comisiones de retiro las fija cada exchange y cambian con el tiempo, así que fijate cuánto cobran en la pantalla de retiro.
 
