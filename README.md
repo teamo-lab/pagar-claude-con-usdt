@@ -2,12 +2,12 @@
 
 > Mantenido por el equipo de TeamoRouter. El gateway de esta guía es nuestro.
 
-¿Te rechazan la tarjeta en Anthropic u OpenAI, o no tenés una tarjeta para pagos en dólares? Podés usar Claude y los modelos GPT a través de [TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt): Claude Code, Codex y los SDK oficiales se conectan a `api.teamorouter.com`, y el saldo se recarga con USDT o USDC. Si ya tenés una tarjeta que Anthropic u OpenAI aceptan, también podés usar el camino oficial; esta guía es para el resto de los casos.
+¿Te rechazan la tarjeta en Anthropic u OpenAI, o no tenés una tarjeta para pagos en dólares? Podés usar Claude y los modelos GPT a través de [TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt): Claude Code, Codex y los SDK oficiales se conectan a `api.teamorouter.com`, y el saldo se recarga con USDT. Si ya tenés una tarjeta que Anthropic u OpenAI aceptan, también podés usar el camino oficial; esta guía es para el resto de los casos.
 
 ## Respuesta corta
 
 - **Qué cambia en tu código:** la base URL y la key (`sk-teamo-...`). Para Claude, `https://api.teamorouter.com` (sin `/v1`) con el protocolo nativo de Anthropic; para GPT, `https://api.teamorouter.com/v1` con el formato estándar de OpenAI. Requests, respuestas y streaming siguen el formato de cada protocolo.
-- **Cómo pagás:** en la ventana de recarga hacés clic en **Pay with crypto**, elegís la red en la página de pago y transferís USDT o USDC a la dirección que te muestra, desde la app de tu exchange (Binance, OKX u otros) o desde cualquier wallet. No necesitás extensión del navegador y funciona desde el celular. Mínimo US$5. La ventana de recarga también acepta tarjeta a través de Stripe.
+- **Cómo pagás:** en la ventana de recarga hacés clic en **Pay with crypto**, elegís la red en la página de pago (BEP20, TRC20 o ERC20) y transferís USDT a la dirección que te muestra, desde la app de tu exchange (Binance, OKX u otros) o desde cualquier wallet. No necesitás extensión del navegador y funciona desde el celular. Mínimo US$5. La ventana de recarga también acepta tarjeta a través de Stripe.
 - **Qué obtenés:** una sola key para Claude, GPT (`gpt-6-sol`, `gpt-6-luna`, `gpt-6-astra` y otros), Gemini, DeepSeek y más de 30 modelos, con cobro por token y sin suscripción.
 - **Qué no necesitás:** cuenta de Anthropic u OpenAI, login de ChatGPT ni tarjeta de crédito.
 
@@ -161,37 +161,36 @@ Ejecutá `codex`. Los pasos para Windows (PowerShell) están en la [guía de Cod
 - `base_url` va **con** `/v1` al final (al revés que en Claude Code).
 - Modelos: `gpt-6-sol` por defecto; `gpt-6-luna` cuesta bastante menos por token; `gpt-6-astra` es el de mayor precio de los tres. Dentro de la sesión, `/model` cambia de modelo y `/fast` activa el modo Fast (en los modelos que lo ofrecen, se factura al doble).
 
-## Recargar con USDT o USDC, paso a paso
+## Recargar con USDT, paso a paso
 
-Necesitás una cuenta de TeamoRouter y USDT o USDC en un exchange o en una wallet, que alcance para el monto de la recarga más la comisión de retiro. Nada más: la página de pago es una página web común, así que con el celular y la app de tu exchange alcanza.
+Necesitás una cuenta de TeamoRouter y USDT en un exchange o en una wallet, que alcance para el monto de la recarga más la comisión de retiro. Nada más: la página de pago es una página web común, así que con el celular y la app de tu exchange alcanza.
 
-### Monedas y redes aceptadas
+### Redes aceptadas
 
-| Moneda | Red | Notas |
-|---|---|---|
-| USDT | BEP20 (BNB Smart Chain) | Recomendada: retirar desde Binance cuesta alrededor de 0,01 USDT |
-| USDT | TRC20 (Tron) | Retirar desde Binance cuesta alrededor de 1,5 USDT |
-| USDT | ERC20 (Ethereum) | |
-| USDT | TON | |
-| USDC | Base | |
-| USDC | BSC (BNB Smart Chain) | |
+TeamoRouter acepta solo USDT, en tres redes:
 
-La lista vigente es la que muestra la página de pago. Las comisiones de retiro las fija cada exchange y cambian con el tiempo, así que fijate cuánto cobran en la pantalla de retiro.
+| Red | Notas |
+|---|---|
+| BEP20 (BNB Smart Chain) | Recomendada: retirar desde Binance cuesta alrededor de 0,01 USDT |
+| TRC20 (Tron) | Retirar desde Binance cuesta alrededor de 1,5 USDT |
+| ERC20 (Ethereum) | |
+
+Cualquier otra moneda que mandes a la dirección de pago no cuenta como pago. Las comisiones de retiro las fija cada exchange y cambian con el tiempo, así que fijate cuánto cobran en la pantalla de retiro.
 
 ### Pasos
 
 1. Iniciá sesión en TeamoRouter, abrí la ventana de recarga en la consola y elegí un monto (US$5 o más).
-2. Hacé clic en **Pay with crypto** (en pantallas angostas el botón dice **Crypto**). Te lleva a la página de pago.
-3. En la página de pago, elegí la moneda y la red desde la que vas a mandar. La página te muestra el monto a transferir y una dirección de depósito. La orden vale **60 minutos**.
-4. En la app de tu exchange, iniciá un retiro (en una wallet, un envío): elegí **la misma moneda y la misma red**, pegá la dirección de la página de pago y poné el monto de forma que lo que te llegue **no sea menor que el monto de la página**. Si la página de pago también muestra un memo o tag, cargalo también.
+2. Hacé clic en **Pay with crypto** (en pantallas angostas el botón dice **Crypto**). Te lleva a la página de pago. Si te registraste con un número de teléfono, primero te van a pedir un email.
+3. La página de pago abre directamente en la elección de red. Elegí la red por la que vas a mandar: BEP20, TRC20 o ERC20. La página te muestra cuántos USDT transferir y una dirección de depósito. La orden vale **60 minutos**.
+4. En la app de tu exchange, iniciá un retiro (en una wallet, un envío): elegí **USDT en la misma red**, pegá la dirección de la página de pago y poné el monto de forma que lo que te llegue **no sea menor que el monto de la página**.
 5. Esperá a que la red confirme la transferencia. El saldo se acredita cuando se confirma el pago, aunque cierres la página de pago. Si todavía no aparece, actualizá la consola en un rato y no vuelvas a pagar.
 6. Cuando se acredite el saldo, [creá una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt).
 
 ### Por qué puede fallar un pago cripto
 
-- **Mandar por otra red.** Retirá por la misma red que elegiste en la página de pago. Las direcciones BEP20 y ERC20 empiezan las dos con `0x`, así que el exchange te va a dejar mandar USDT por ERC20 a una dirección BEP20, pero esa transferencia no cuenta como pago de la orden. Cada exchange llama a las redes a su manera: BEP20 puede aparecer como BSC o BNB Smart Chain, TRC20 como Tron y ERC20 como Ethereum. Si tu exchange no ofrece esa red para esa moneda, volvé a la página de pago y elegí una que sí ofrezca.
+- **Mandar por otra red.** Retirá por la misma red que elegiste en la página de pago. Las direcciones BEP20 y ERC20 empiezan las dos con `0x`, así que el exchange te va a dejar mandar USDT por ERC20 a una dirección BEP20, pero esa transferencia no cuenta como pago de la orden. Cada exchange llama a las redes a su manera: BEP20 puede aparecer como BSC o BNB Smart Chain, TRC20 como Tron y ERC20 como Ethereum. Si tu exchange no permite retirar USDT por esa red, volvé a la página de pago y elegí una que sí ofrezca.
 - **La comisión de retiro se come parte del monto.** Muchos exchanges descuentan la comisión del monto que escribís. Antes de confirmar, mirá la línea de "monto a recibir" en la pantalla de retiro: tiene que ser por lo menos el monto de la página de pago; si la comisión sale de tu monto, sumala arriba. Una orden a la que le falta hasta un 1% igual cuenta como pagada. Si falta más, no mandes una segunda transferencia: contactá a soporte con tu TxID. Si mandás de más, el saldo se acredita por el monto de la orden y podés contactar a soporte por la diferencia.
-- **La orden vence.** A veces el exchange retiene el retiro para una revisión manual, que puede tardar más de 60 minutos. Antes de hacer clic en **Pay with crypto**, asegurate de que las monedas ya estén en la cuenta del exchange desde la que vas a retirar. Si venció antes de que mandaras nada: renová la orden en la página de pago o empezá una recarga nueva, y mandá a la dirección vigente, no a una que copiaste antes. Si venció después de que ya mandaste: no vuelvas a mandar; renová la orden en la página de pago y, si con eso no se resuelve, contactá a soporte con tu TxID.
+- **La orden vence.** A veces el exchange retiene el retiro para una revisión manual, que puede tardar más de 60 minutos. Antes de hacer clic en **Pay with crypto**, asegurate de que los USDT ya estén en la cuenta del exchange desde la que vas a retirar. Si venció antes de que mandaras nada: renová la orden en la página de pago o empezá una recarga nueva, y mandá a la dirección vigente, no a una que copiaste antes. Si venció después de que ya mandaste: no vuelvas a mandar; renová la orden en la página de pago y, si con eso no se resuelve, contactá a soporte con tu TxID.
 
 ### Dónde encontrar el TxID
 
@@ -202,7 +201,7 @@ El TxID (también llamado hash de la transacción o Txn Hash) identifica tu tran
 
 Cuando contactes a soporte, pasá el TxID, la red, el monto, la hora en que mandaste y la cuenta de TeamoRouter que recargaste.
 
-Guía completa: [Pay for Claude and GPT APIs with Crypto (USDT, USDC)](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
+Guía completa: [Pay for Claude and GPT APIs with Crypto (USDT)](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
 
 ## ¿Ya tenés USDT en X Layer? Pagá con OKX Wallet
 
