@@ -2,13 +2,13 @@
 
 > Mantenido por el equipo de TeamoRouter. El gateway de esta guía es nuestro.
 
-¿Te rechazan la tarjeta en Anthropic u OpenAI, o no tenés una tarjeta para pagos en dólares? Podés usar Claude y los modelos GPT a través de [TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt): Claude Code, Codex y los SDK oficiales se conectan a `api.teamorouter.com`, y el saldo se recarga con USDT. Si ya tenés una tarjeta que Anthropic u OpenAI aceptan, también podés usar el camino oficial; esta guía es para el resto de los casos.
+¿Te rechazan la tarjeta en Anthropic u OpenAI, o no tenés una tarjeta para pagos en dólares? Podés usar Claude y los modelos GPT a través de [TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt): Claude Code, Codex y los SDK oficiales se conectan a `api.teamorouter.com`, y el saldo se recarga con USDT. Si ya tenés una tarjeta que Anthropic u OpenAI aceptan, también podés usar el camino oficial; esta guía es para el resto de los casos.
 
 ## Respuesta corta
 
 - **Qué cambia en tu código:** la base URL y la key (`sk-teamo-...`). Para Claude, `https://api.teamorouter.com` (sin `/v1`) con el protocolo nativo de Anthropic; para GPT, `https://api.teamorouter.com/v1` con el formato estándar de OpenAI. Requests, respuestas y streaming siguen el formato de cada protocolo.
 - **Cómo pagás:** en la ventana de recarga hacés clic en **Pay with crypto**, en la página de pago elegís la moneda (USDT, USDC o ETH) y después la red, y transferís a la dirección que te muestra. La página de pago muestra qué redes admite tu monto (BEP20 funciona desde US$5). Podés mandar desde la app de tu exchange (Binance, OKX u otros) o desde cualquier wallet. No necesitás extensión del navegador y funciona desde el celular. Mínimo US$5. La ventana de recarga también acepta tarjeta a través de Stripe.
-- **Qué obtenés:** una sola key para Claude, GPT (`gpt-6-sol`, `gpt-6-luna`, `gpt-6-astra` y otros), Gemini, DeepSeek y más de 30 modelos, con cobro por token y sin suscripción.
+- **Qué obtenés:** una sola key para Claude, GPT (`gpt-6-sol`, `gpt-6-luna`, `gpt-6-astra` y otros), Gemini, DeepSeek y más de 60 modelos, con cobro por token y sin suscripción.
 - **Qué no necesitás:** cuenta de Anthropic u OpenAI, login de ChatGPT ni tarjeta de crédito.
 
 ## ¿Por qué USDT en Argentina?
@@ -22,7 +22,7 @@ Las fuentes están al final de este archivo.
 
 ## Claude Code
 
-Necesitás [Node.js](https://nodejs.org/en/download/) y una API key de TeamoRouter ([creala en la consola](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt)).
+Necesitás [Node.js](https://nodejs.org/en/download/) y una API key de TeamoRouter ([creala en la consola](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt)).
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -61,7 +61,7 @@ setx CLAUDE_CODE_SUBAGENT_MODEL "claude-sonnet-5"
 setx CLAUDE_CODE_EFFORT_LEVEL "xhigh"
 ```
 
-Ejecutá `claude` en la carpeta del proyecto. Guía completa con capturas: [instalar Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
+Ejecutá `claude` en la carpeta del proyecto. Guía completa con capturas: [instalar Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés).
 
 - `ANTHROPIC_BASE_URL` va **sin** `/v1` al final.
 - ¿Ves `Not logged in · Please run /login`? No inicies sesión: en esa terminal no está definida `ANTHROPIC_AUTH_TOKEN`. Ejecutá `source ~/.zshrc` (o `~/.bashrc`), o abrí una terminal nueva después de `setx`.
@@ -135,7 +135,7 @@ Para tener en cuenta:
 - Para ver los modelos que puede usar tu key: `curl https://api.teamorouter.com/v1/models -H "Authorization: Bearer sk-teamo-xxxxxx"`.
 - Modo Fast opcional: `service_tier: "fast"` en los modelos que lo ofrecen (por ejemplo, `gpt-6-astra`); se factura al doble.
 
-Referencia completa: [guía de integración de la API](https://teamorouter.com/docs/api-integration?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
+Referencia completa: [guía de integración de la API](https://teamorouter.com/docs/api-integration?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés).
 
 ## Codex CLI
 
@@ -156,7 +156,7 @@ echo 'export OPENAI_API_KEY="<tu-key-de-TeamoRouter>"' >> ~/.zshrc   # ~/.bashrc
 source ~/.zshrc
 ```
 
-Ejecutá `codex`. Los pasos para Windows (PowerShell) están en la [guía de Codex CLI](https://teamorouter.com/docs/install-codex?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
+Ejecutá `codex`. Los pasos para Windows (PowerShell) están en la [guía de Codex CLI](https://teamorouter.com/docs/install-codex?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés).
 
 - `base_url` va **con** `/v1` al final (al revés que en Claude Code).
 - Modelos: `gpt-6-sol` por defecto; `gpt-6-luna` cuesta bastante menos por token; `gpt-6-astra` es el de mayor precio de los tres. Dentro de la sesión, `/model` cambia de modelo y `/fast` activa el modo Fast (en los modelos que lo ofrecen, se factura al doble).
@@ -182,11 +182,11 @@ Mandá solo la moneda y la red que elegiste; cualquier otra cosa que mandes a la
 ### Pasos
 
 1. Iniciá sesión en TeamoRouter, abrí la ventana de recarga en la consola y elegí un monto (US$5 o más). El monto define qué monedas y redes ofrece la página de pago.
-2. Hacé clic en **Pay with crypto** (en pantallas angostas el botón dice **Crypto**). Te lleva a la página de pago. Si te registraste con un número de teléfono, primero te van a pedir un email.
+2. Hacé clic en **Pay with crypto** (en pantallas angostas el botón dice **Crypto**). Te lleva a la página de pago.
 3. La página de pago primero te pide elegir la moneda (USDT, USDC o ETH) y después la red por la que vas a mandar. Solo aparecen las redes disponibles para tu monto. La página te muestra cuánto transferir y una dirección de depósito. La orden vale **60 minutos**.
 4. En la app de tu exchange, iniciá un retiro (en una wallet, un envío): elegí **la misma moneda en la misma red**, pegá la dirección de la página de pago y poné el monto de forma que lo que te llegue **no sea menor que el monto de la página**.
 5. Esperá a que la red confirme la transferencia. El saldo se acredita cuando se confirma el pago, aunque cierres la página de pago. Si todavía no aparece, actualizá la consola en un rato y no vuelvas a pagar.
-6. Cuando se acredite el saldo, [creá una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt).
+6. Cuando se acredite el saldo, [creá una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt).
 
 ### Por qué puede fallar un pago cripto
 
@@ -203,7 +203,7 @@ El TxID (también llamado hash de la transacción o Txn Hash) identifica tu tran
 
 Cuando contactes a soporte, pasá el TxID, la red, el monto, la hora en que mandaste y la cuenta de TeamoRouter que recargaste.
 
-Guía completa: [Pay for Claude and GPT APIs with Crypto (USDT)](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés).
+Guía completa: [Pay for Claude and GPT APIs with Crypto (USDT)](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés).
 
 ## ¿Ya tenés USDT en X Layer? Pagá con OKX Wallet
 
@@ -249,7 +249,7 @@ Errores de esta ruta:
 
 **¿Se aplican los límites de uso de Codex?** Los límites que se reinician cada pocas horas o cada semana son de los planes de ChatGPT. Con una API key pagás por token mientras tengas saldo.
 
-**¿La misma key sirve para Claude y para GPT?** Sí. Claude funciona con el protocolo nativo de Anthropic: el SDK de Anthropic con `base_url="https://api.teamorouter.com"` (sin `/v1`) o [Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) con `ANTHROPIC_BASE_URL`. Por el formato de OpenAI, Claude puede perder el prompt caching y el thinking.
+**¿La misma key sirve para Claude y para GPT?** Sí. Claude funciona con el protocolo nativo de Anthropic: el SDK de Anthropic con `base_url="https://api.teamorouter.com"` (sin `/v1`) o [Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) con `ANTHROPIC_BASE_URL`. Por el formato de OpenAI, Claude puede perder el prompt caching y el thinking.
 
 **¿Puedo pagar desde el celular?** Sí. Abrí la página de pago en el celular y copiá la dirección y el monto en la app de tu exchange.
 
@@ -257,15 +257,17 @@ Errores de esta ruta:
 
 **¿Puedo pagar con tarjeta?** Sí, la ventana de recarga también acepta tarjeta a través de Stripe.
 
-**¿Cuánto cuesta?** Los precios por token de cada modelo están en la [página de precios](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt#pricing). Sin suscripción.
+**¿Cuánto cuesta?** Los precios por token de cada modelo están en la [página de precios](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt#pricing). Sin suscripción.
 
 ## Links
 
-- [Inicio de TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt)
-- [Pagar con cripto: guía completa](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés)
-- [Instalar Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés)
-- [Instalar Codex CLI](https://teamorouter.com/docs/install-codex?utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt) (en inglés)
-- [Crear una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=pagar-claude-con-usdt)
+- [Inicio de TeamoRouter](https://teamorouter.com/?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt)
+- [Pagar con cripto: guía completa](https://teamorouter.com/blogs/pay-claude-with-usdt?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés)
+- [Instalar Claude Code](https://teamorouter.com/docs/install-claude-code?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés)
+- [Instalar Codex CLI](https://teamorouter.com/docs/install-codex?utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt) (en inglés)
+- [Crear una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt)
+- [teamo-lab/claude-api-card-declined](https://github.com/teamo-lab/claude-api-card-declined): si Anthropic rechaza tu tarjeta (en inglés)
+- [teamo-lab/openrouter-usdt](https://github.com/teamo-lab/openrouter-usdt): OpenRouter solo acepta USDC; qué hacer si tenés USDT (en inglés)
 
 <!--
 Fuentes de "¿Por qué USDT en Argentina?" (consultadas el 2026-10-19):
