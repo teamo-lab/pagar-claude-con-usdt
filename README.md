@@ -268,6 +268,7 @@ Errores de esta ruta:
 - [Crear una API key](https://teamorouter.com/dashboard?tab=api-keys&utm_source=github&utm_medium=readme&utm_campaign=b6_pagar-claude-con-usdt)
 - [teamo-lab/claude-api-card-declined](https://github.com/teamo-lab/claude-api-card-declined): si Anthropic rechaza tu tarjeta (en inglés)
 - [teamo-lab/openrouter-usdt](https://github.com/teamo-lab/openrouter-usdt): OpenRouter solo acepta USDC; qué hacer si tenés USDT (en inglés)
+- [teamo-lab/new-llm-api-releases](https://github.com/teamo-lab/new-llm-api-releases): modelos nuevos el día del lanzamiento: ID, precio oficial y ejemplos de código (en inglés)
 
 <!--
 Fuentes de "¿Por qué USDT en Argentina?" (consultadas el 2026-10-19):
